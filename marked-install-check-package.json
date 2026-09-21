@@ -1,0 +1,7 @@
+{
+  "name": "xmartpoint-app-md-support-temp",
+  "private": true,
+  "dependencies": {
+    "marked": "^12.0.1"
+  }
+}

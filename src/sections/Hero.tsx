@@ -6,9 +6,6 @@ import ColorBends from "@/components/ColorBends";
 export function Hero() {
   const [isDigitalHovered, setIsDigitalHovered] = useState(false);
 
-  // Provide real hex colors for ColorBends based on theme
-  const colorBendsColors = ["#5227FF", "#FF9FFC", "#7cff67"];
-
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -24,17 +21,6 @@ export function Hero() {
       <div className="absolute inset-0">
         <ColorBends
           className="h-full w-full"
-          rotation={45}
-          speed={0.2}
-          colors={colorBendsColors}
-          transparent
-          autoRotate={0}
-          scale={0.4}
-          frequency={1.75}
-          warpStrength={1}
-          mouseInfluence={1.2}
-          parallax={0.5}
-          noise={0.1}
         />
       </div>
 

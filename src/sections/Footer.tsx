@@ -11,17 +11,16 @@ const footerLinks = {
   company: [
     { name: "About", href: "/about" },
     { name: "Services", href: "/services" },
-    { name: "Pricing", href: "/pricing" },
-    { name: "Blog", href: "/blog" },
     { name: "Careers", href: "/contact" },
     { name: "Contact", href: "/contact" },
   ],
   services: [
-    { name: "Cloud Services", href: "/services/cloud-services" },
-    { name: "Cybersecurity", href: "/services/cybersecurity" },
-    { name: "Software Development", href: "/services/software-development" },
-    { name: "AI & Machine Learning", href: "/services/ai-ml" },
-    { name: "Data Science", href: "/services/data-science" },
+    { name: "Web Design", href: "/services/web-design" },
+    { name: "Web Development Service", href: "/services/web-development" },
+    { name: "UI/UX Design", href: "/services/ui-ux-design" },
+    { name: "App Development", href: "/services/app-development" },
+    { name: "Web Security", href: "/services/web-security" },
+    { name: "Digital Marketing", href: "/services/digital-marketing" },
     { name: "View All", href: "/services" },
   ],
   resources: [
@@ -52,8 +51,8 @@ export function Footer() {
               <img src="/Logo.png" alt="Xmart Logo" className="h-8" />
             </Link>
             <p className="text-sm text-muted-foreground mb-6 max-w-xs">
-              Transforming businesses through innovative IT solutions. Your
-              trusted partner for digital excellence.
+              Nepal-based digital technology company specializing in enterprise
+              FinTech solutions and Microsoft 365 development.
             </p>
 
             {/* Social Links */}
@@ -132,7 +131,7 @@ export function Footer() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
             <p className="text-sm text-muted-foreground">
-              &copy; {new Date().getFullYear()} Xmart. All rights reserved.
+              &copy; {new Date().getFullYear()} XmartPoint Technologies. All rights reserved.
             </p>
             <div className="flex gap-6">
               <Link

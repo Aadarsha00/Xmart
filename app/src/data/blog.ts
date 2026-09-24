@@ -18,9 +18,10 @@ export interface BlogPost {
 
 export const blogPosts: BlogPost[] = [
   {
-    id: 'future-of-ai-enterprise-it',
-    title: 'The Future of AI in Enterprise IT Infrastructure',
-    excerpt: 'Explore how artificial intelligence is revolutionizing IT operations, from automated monitoring to predictive maintenance and intelligent resource allocation.',
+    id: "future-of-ai-enterprise-it",
+    title: "The Future of AI in Enterprise IT Infrastructure",
+    excerpt:
+      "Explore how artificial intelligence is revolutionizing IT operations, from automated monitoring to predictive maintenance and intelligent resource allocation.",
     content: `
 # The Future of AI in Enterprise IT Infrastructure
 
@@ -111,24 +112,31 @@ Organizations that embrace AI in their IT infrastructure today will be better po
 
 The integration of AI into enterprise IT infrastructure is not just an option—it's becoming a necessity for organizations that want to remain competitive. By starting with clear use cases, building the right team, and focusing on data quality, enterprises can realize significant benefits from AI-powered IT operations.
 
-Ready to transform your IT infrastructure with AI? Contact XSmart to learn how we can help you implement AI-powered solutions tailored to your organization's needs.
+Ready to transform your IT infrastructure with AI? Contact Xmart to learn how we can help you implement AI-powered solutions tailored to your organization's needs.
     `,
-    image: '/blog-1.jpg',
+    image: "/blog-1.jpg",
     author: {
-      name: 'Alex Martinez',
-      role: 'Chief Technology Officer',
-      image: '/team-2.jpg',
+      name: "Alex Martinez",
+      role: "Chief Technology Officer",
+      image: "/team-2.jpg",
     },
-    date: '2026-01-28',
-    readTime: '8 min read',
-    category: 'AI & Machine Learning',
-    tags: ['AI', 'Machine Learning', 'IT Infrastructure', 'Enterprise', 'Automation'],
-    relatedPosts: ['zero-trust-security-guide', 'multi-cloud-strategy'],
+    date: "2026-01-28",
+    readTime: "8 min read",
+    category: "AI & Machine Learning",
+    tags: [
+      "AI",
+      "Machine Learning",
+      "IT Infrastructure",
+      "Enterprise",
+      "Automation",
+    ],
+    relatedPosts: ["zero-trust-security-guide", "multi-cloud-strategy"],
   },
   {
-    id: 'zero-trust-security-guide',
-    title: 'Zero Trust Security: A Complete Implementation Guide',
-    excerpt: 'Learn how to implement a zero-trust security model in your organization with practical steps and best practices from industry experts.',
+    id: "zero-trust-security-guide",
+    title: "Zero Trust Security: A Complete Implementation Guide",
+    excerpt:
+      "Learn how to implement a zero-trust security model in your organization with practical steps and best practices from industry experts.",
     content: `
 # Zero Trust Security: A Complete Implementation Guide
 
@@ -270,24 +278,31 @@ Focus initial implementation on:
 
 Implementing Zero Trust Security is a journey, not a destination. By following this guide and adapting the approach to your organization's specific needs, you can build a more secure, resilient infrastructure that protects your critical assets in today's threat landscape.
 
-Need help implementing Zero Trust Security? XSmart's security experts can guide you through every step of the process. Contact us for a consultation.
+Need help implementing Zero Trust Security? Xmart's security experts can guide you through every step of the process. Contact us for a consultation.
     `,
-    image: '/blog-2.jpg',
+    image: "/blog-2.jpg",
     author: {
-      name: 'Robert Chen',
-      role: 'Head of Security',
-      image: '/team-3.jpg',
+      name: "Robert Chen",
+      role: "Head of Security",
+      image: "/team-3.jpg",
     },
-    date: '2026-01-25',
-    readTime: '12 min read',
-    category: 'Cybersecurity',
-    tags: ['Zero Trust', 'Security', 'Cybersecurity', 'Network Security', 'IAM'],
-    relatedPosts: ['future-of-ai-enterprise-it', 'multi-cloud-strategy'],
+    date: "2026-01-25",
+    readTime: "12 min read",
+    category: "Cybersecurity",
+    tags: [
+      "Zero Trust",
+      "Security",
+      "Cybersecurity",
+      "Network Security",
+      "IAM",
+    ],
+    relatedPosts: ["future-of-ai-enterprise-it", "multi-cloud-strategy"],
   },
   {
-    id: 'multi-cloud-strategy',
-    title: 'Multi-Cloud Strategy: Benefits and Best Practices',
-    excerpt: 'Discover why leading enterprises are adopting multi-cloud strategies and how to manage complexity while maximizing benefits.',
+    id: "multi-cloud-strategy",
+    title: "Multi-Cloud Strategy: Benefits and Best Practices",
+    excerpt:
+      "Discover why leading enterprises are adopting multi-cloud strategies and how to manage complexity while maximizing benefits.",
     content: `
 # Multi-Cloud Strategy: Benefits and Best Practices
 
@@ -476,28 +491,35 @@ Use secondary cloud for DR:
 
 A well-executed multi-cloud strategy can deliver significant benefits, but success requires careful planning, strong governance, and the right tools. By following the best practices outlined in this guide, organizations can maximize the benefits while managing the complexity of multi-cloud environments.
 
-Ready to develop your multi-cloud strategy? XSmart's cloud experts can help you design and implement a solution tailored to your organization's needs.
+Ready to develop your multi-cloud strategy? Xmart's cloud experts can help you design and implement a solution tailored to your organization's needs.
     `,
-    image: '/blog-3.jpg',
+    image: "/blog-3.jpg",
     author: {
-      name: 'Sarah Johnson',
-      role: 'VP of Operations',
-      image: '/team-4.jpg',
+      name: "Sarah Johnson",
+      role: "VP of Operations",
+      image: "/team-4.jpg",
     },
-    date: '2026-01-22',
-    readTime: '10 min read',
-    category: 'Cloud Computing',
-    tags: ['Multi-Cloud', 'Cloud Strategy', 'AWS', 'Azure', 'GCP', 'Cloud Management'],
-    relatedPosts: ['future-of-ai-enterprise-it', 'zero-trust-security-guide'],
+    date: "2026-01-22",
+    readTime: "10 min read",
+    category: "Cloud Computing",
+    tags: [
+      "Multi-Cloud",
+      "Cloud Strategy",
+      "AWS",
+      "Azure",
+      "GCP",
+      "Cloud Management",
+    ],
+    relatedPosts: ["future-of-ai-enterprise-it", "zero-trust-security-guide"],
   },
 ];
 
 export const getBlogPostById = (id: string): BlogPost | undefined => {
-  return blogPosts.find(post => post.id === id);
+  return blogPosts.find((post) => post.id === id);
 };
 
 export const getRelatedPosts = (postId: string): BlogPost[] => {
   const post = getBlogPostById(postId);
   if (!post) return [];
-  return blogPosts.filter(p => post.relatedPosts.includes(p.id));
+  return blogPosts.filter((p) => post.relatedPosts.includes(p.id));
 };

@@ -6,9 +6,9 @@ import { Statistics } from "@/sections/Statistics";
 import { Services } from "@/sections/Services";
 import { Testimonials } from "@/sections/Testimonials";
 
-import { Blog } from "@/sections/Blog";
 
 import { About } from "@/sections/About";
+import { Blog } from "@/sections/Blog";
 
 // Inline CTASection from AboutPage
 import { ArrowRight } from "lucide-react";

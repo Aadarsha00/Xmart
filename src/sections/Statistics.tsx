@@ -6,24 +6,24 @@ gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
   {
-    value: 500,
+    value: 10,
     suffix: "+",
-    label: "Happy Clients",
+    label: "Years of Excellence",
   },
   {
-    value: 98,
-    suffix: "%",
-    label: "Success Rate",
+    value: 50,
+    suffix: "+",
+    label: "Clients Worldwide",
+  },
+  {
+    value: 25,
+    suffix: "+",
+    label: "Team Members",
   },
   {
     value: 50,
     suffix: "+",
     label: "Countries Served",
-  },
-  {
-    value: 99.9,
-    suffix: "%",
-    label: "Uptime Guarantee",
   },
 ];
 
@@ -138,8 +138,7 @@ export function Statistics() {
             style={{ color: "hsl(var(--foreground) / 0.62)" }}
           >
             We focus on predictable delivery, measurable outcomes, and long-term
-            partnerships. These numbers represent the consistency of our process
-            across industries and project scales.
+            partnerships.
           </p>
         </div>
 

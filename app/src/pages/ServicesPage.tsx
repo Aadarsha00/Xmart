@@ -1,9 +1,83 @@
-import { useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, Check } from 'lucide-react';
-import { services } from '@/data/services';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowRight } from "lucide-react";
+// CTA Section matching Home/About design
+function CTASection() {
+  return (
+    <section className="w-full flex justify-center items-center mt-24">
+      <div
+        className="w-full max-w-7xl rounded-3xl px-6 sm:px-12 py-12 flex flex-col sm:flex-row items-center justify-between gap-8 shadow-lg relative overflow-hidden"
+        style={{
+          minHeight: "200px",
+          background: "hsl(var(--background) / 0.98)",
+          border: "1.5px solid hsl(var(--border) / 0.13)",
+        }}
+      >
+        {/* Themed radial glow in top-right using primary color */}
+        <div
+          className="pointer-events-none absolute right-0 top-0 w-72 h-72"
+          style={{
+            background:
+              "radial-gradient(ellipse at top right, hsl(var(--primary) / 0.18) 0%, transparent 70%)",
+          }}
+        />
+        <div className="flex-1 min-w-0">
+          <h2
+            className="font-['Space_Grotesk'] text-left text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight uppercase mb-7"
+            style={{ color: "hsl(var(--foreground))" }}
+          >
+            NEED A CUSTOM
+            <br />
+            SOLUTION?
+          </h2>
+          <p
+            className="text-left text-sm sm:text-base tracking-wide uppercase max-w-xl"
+            style={{ color: "hsl(var(--foreground) / 0.6)" }}
+          >
+            OUR TEAM CAN TAILOR ANY OF OUR SERVICES TO MEET YOUR SPECIFIC
+            REQUIREMENTS. LET'S DISCUSS HOW WE CAN HELP YOU ACHIEVE YOUR GOALS.
+          </p>
+        </div>
+        <div className="flex-shrink-0 flex items-center justify-center mt-8 sm:mt-0">
+          <button
+            type="button"
+            className="relative group focus:outline-none"
+            aria-label="Scroll Down"
+            style={{ width: 88, height: 88 }}
+          >
+            {/* Outer dashed border using primary color */}
+            <span
+              className="absolute inset-0 rounded-full border-2 border-dashed"
+              style={{
+                boxSizing: "border-box",
+                borderColor: "hsl(var(--primary))",
+              }}
+            />
+            {/* Primary background and glow */}
+            <span
+              className="absolute inset-2 rounded-full"
+              style={{
+                background: "hsl(var(--primary))",
+                boxShadow: "0 0 0 8px hsl(var(--primary) / 0.10)",
+              }}
+            />
+            {/* Down arrow themed for contrast */}
+            <span className="relative z-10 flex items-center justify-center w-full h-full">
+              <ArrowRight
+                className="w-8 h-8"
+                style={{ color: "hsl(var(--primary-foreground))" }}
+              />
+            </span>
+          </button>
+        </div>
+      </div>
+    </section>
+  );
+}
+import { useEffect, useRef } from "react";
+import { Link } from "react-router-dom";
+import { Check } from "lucide-react";
+import { services } from "@/data/services";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -13,90 +87,103 @@ export function ServicesPage() {
   useEffect(() => {
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        '.service-page-card',
+        ".service-section",
         { opacity: 0, y: 60 },
         {
           opacity: 1,
           y: 0,
           duration: 0.8,
-          stagger: 0.1,
-          ease: 'power3.out',
+          stagger: 0.2,
+          ease: "power3.out",
           scrollTrigger: {
-            trigger: '.services-grid',
-            start: 'top 80%',
-            toggleActions: 'play none none reverse',
+            trigger: pageRef.current,
+            start: "top 80%",
+            toggleActions: "play none none reverse",
           },
-        }
+        },
       );
     }, pageRef);
-
     return () => ctx.revert();
   }, []);
 
   return (
     <div ref={pageRef} className="pt-24 pb-24">
-      {/* Header */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
-        <div className="text-center">
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 border border-primary/20">
+      {/* Hero Section */}
+      <section className="service-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="mb-10">
+          <span
+            className="inline-flex items-center border-l-4 pl-4 font-['Space_Grotesk'] text-[0.68rem] tracking-[0.14em] uppercase mb-4"
+            style={{
+              color: "hsl(var(--primary))",
+              borderLeft: "4px solid hsl(var(--primary) / 0.8)",
+            }}
+          >
             Our Services
           </span>
-          <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold mb-6 font-['Oswald']">
-            Comprehensive <span className="text-gradient">IT Solutions</span>
+          <h1
+            className="font-['Space_Grotesk'] text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-7"
+            style={{ color: "hsl(var(--foreground))" }}
+          >
+            Comprehensive{" "}
+            <span style={{ color: "hsl(var(--primary))" }}>IT Solutions</span>
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            From cloud infrastructure to AI-powered applications, we offer a full spectrum of 
-            technology services to help your business thrive in the digital age.
+          <p
+            className="text-base mb-5 leading-relaxed max-w-2xl"
+            style={{ color: "hsl(var(--foreground) / 0.7)" }}
+          >
+            From cloud infrastructure to AI-powered applications, we offer a
+            full spectrum of technology services to help your business thrive in
+            the digital age.
           </p>
         </div>
-      </div>
+      </section>
 
-      {/* Services Grid */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="services-grid grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* Services Grid - Editorial, Minimal, Glass Effect */}
+      <section className="service-section max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mb-24">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-x-12 gap-y-16">
           {services.map((service) => (
-            <div
-              key={service.id}
-              className="service-page-card group bg-card border border-border rounded-2xl overflow-hidden transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 hover:border-primary/30"
-            >
-              {/* Image */}
-              <div className="relative h-48 overflow-hidden">
+            <div key={service.id} className="group flex flex-col h-full">
+              <div className="relative mb-6 rounded-2xl overflow-hidden aspect-[4/3] border border-border bg-card/80 glass-effect">
                 <img
                   src={service.image}
                   alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-card to-transparent" />
                 <div className="absolute bottom-4 left-4">
-                  <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-lg">
-                    <service.icon className="w-6 h-6 text-white" />
+                  <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-md">
+                    <service.icon className="w-6 h-6 text-primary-foreground" />
                   </div>
                 </div>
               </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-2 font-['Oswald'] group-hover:text-primary transition-colors duration-300">
-                  {service.title}
-                </h3>
-                <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                  {service.shortDescription}
-                </p>
-
-                {/* Features Preview */}
-                <ul className="space-y-2 mb-6">
-                  {service.features.slice(0, 3).map((feature, i) => (
-                    <li key={i} className="flex items-center gap-2 text-sm">
-                      <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
-                      <span className="text-muted-foreground">{feature}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                {/* CTA */}
+              <h3
+                className="font-['Space_Grotesk'] text-2xl font-bold mb-2 group-hover:text-primary transition-colors duration-300"
+                style={{ color: "hsl(var(--foreground))" }}
+              >
+                {service.title}
+              </h3>
+              <p
+                className="text-muted-foreground text-base mb-4 line-clamp-2"
+                style={{ color: "hsl(var(--foreground) / 0.6)" }}
+              >
+                {service.shortDescription}
+              </p>
+              <ul className="space-y-2 mb-6">
+                {service.features.slice(0, 3).map((feature, i) => (
+                  <li key={i} className="flex items-center gap-2 text-sm">
+                    <Check className="w-4 h-4 text-primary flex-shrink-0" />
+                    <span
+                      className="text-muted-foreground"
+                      style={{ color: "hsl(var(--foreground) / 0.7)" }}
+                    >
+                      {feature}
+                    </span>
+                  </li>
+                ))}
+              </ul>
+              <div className="mt-auto">
                 <Link
                   to={`/services/${service.id}`}
-                  className="inline-flex items-center gap-2 text-primary font-medium group/link"
+                  className="inline-flex items-center gap-2 text-primary font-medium group/link hover:underline"
                 >
                   Learn More
                   <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover/link:translate-x-1" />
@@ -105,40 +192,16 @@ export function ServicesPage() {
             </div>
           ))}
         </div>
-      </div>
+      </section>
 
-      {/* CTA Section */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-24">
-        <div className="relative bg-gradient-to-r from-primary/10 via-primary/5 to-blue-400/10 border border-primary/20 rounded-3xl p-12 text-center overflow-hidden">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl" />
-          <div className="absolute bottom-0 left-0 w-48 h-48 bg-blue-400/10 rounded-full blur-3xl" />
-          
-          <div className="relative z-10">
-            <h2 className="text-3xl font-bold mb-4 font-['Oswald']">
-              Need a Custom Solution?
-            </h2>
-            <p className="text-muted-foreground mb-8 max-w-2xl mx-auto">
-              Our team can tailor any of our services to meet your specific requirements. 
-              Let&apos;s discuss how we can help you achieve your goals.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link
-                to="/contact"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-white rounded-full font-medium hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/30"
-              >
-                Get in Touch
-                <ArrowRight className="w-5 h-5" />
-              </Link>
-              <Link
-                to="/pricing"
-                className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-card border border-border text-foreground rounded-full font-medium hover:bg-muted transition-all duration-300"
-              >
-                View Pricing
-              </Link>
-            </div>
-          </div>
-        </div>
-      </div>
+      {/* CTA Section - Editorial, Minimal, Modern */}
+      <CTASection />
+      <style>{`
+        .glass-effect {
+          background: linear-gradient(120deg, hsl(var(--background) / 0.82) 80%, hsl(var(--primary) / 0.04));
+          backdrop-filter: blur(8px);
+        }
+      `}</style>
     </div>
   );
 }

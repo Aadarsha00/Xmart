@@ -63,7 +63,7 @@ export function ServiceDetailPage() {
                 {service.id.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ')}
               </span>
             </div>
-            <h1 className="text-4xl sm:text-5xl font-bold font-['Oswald']">
+            <h1 className="text-4xl sm:text-5xl font-bold font-['Space_Grotesk']">
               {service.title}
             </h1>
           </div>
@@ -77,7 +77,7 @@ export function ServiceDetailPage() {
           <div className="lg:col-span-2 space-y-12">
             {/* Description */}
             <section>
-              <h2 className="text-2xl font-bold mb-4 font-['Oswald']">Overview</h2>
+              <h2 className="text-2xl font-bold mb-4 font-['Space_Grotesk']">Overview</h2>
               <p className="text-muted-foreground leading-relaxed text-lg">
                 {service.fullDescription}
               </p>
@@ -85,7 +85,7 @@ export function ServiceDetailPage() {
 
             {/* Features */}
             <section>
-              <h2 className="text-2xl font-bold mb-6 font-['Oswald']">Key Features</h2>
+              <h2 className="text-2xl font-bold mb-6 font-['Space_Grotesk']">Key Features</h2>
               <div className="grid sm:grid-cols-2 gap-4">
                 {service.features.map((feature, i) => (
                   <div
@@ -101,7 +101,7 @@ export function ServiceDetailPage() {
 
             {/* Benefits */}
             <section>
-              <h2 className="text-2xl font-bold mb-6 font-['Oswald']">Benefits</h2>
+              <h2 className="text-2xl font-bold mb-6 font-['Space_Grotesk']">Benefits</h2>
               <ul className="space-y-4">
                 {service.benefits.map((benefit, i) => (
                   <li key={i} className="flex items-center gap-3">
@@ -116,7 +116,7 @@ export function ServiceDetailPage() {
 
             {/* Technologies */}
             <section>
-              <h2 className="text-2xl font-bold mb-6 font-['Oswald']">Technologies We Use</h2>
+              <h2 className="text-2xl font-bold mb-6 font-['Space_Grotesk']">Technologies We Use</h2>
               <div className="flex flex-wrap gap-3">
                 {service.technologies.map((tech, i) => (
                   <span
@@ -131,7 +131,7 @@ export function ServiceDetailPage() {
 
             {/* Use Cases */}
             <section>
-              <h2 className="text-2xl font-bold mb-6 font-['Oswald']">Success Stories</h2>
+              <h2 className="text-2xl font-bold mb-6 font-['Space_Grotesk']">Success Stories</h2>
               <div className="grid sm:grid-cols-3 gap-6">
                 {service.useCases.map((useCase, i) => (
                   <div
@@ -153,7 +153,7 @@ export function ServiceDetailPage() {
               <div className="bg-card border border-border rounded-2xl p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <DollarSign className="w-5 h-5 text-primary" />
-                  <h3 className="font-bold font-['Oswald']">Pricing</h3>
+                  <h3 className="font-bold font-['Space_Grotesk']">Pricing</h3>
                 </div>
                 <div className="space-y-4">
                   <div className="p-4 bg-muted/50 rounded-xl">
@@ -179,7 +179,7 @@ export function ServiceDetailPage() {
 
               {/* Related Services */}
               <div className="bg-card border border-border rounded-2xl p-6">
-                <h3 className="font-bold mb-4 font-['Oswald']">Related Services</h3>
+                <h3 className="font-bold mb-4 font-['Space_Grotesk']">Related Services</h3>
                 <div className="space-y-3">
                   {relatedServices.map((related) => (
                     <Link

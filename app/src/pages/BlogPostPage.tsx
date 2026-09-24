@@ -1,24 +1,33 @@
-import { useEffect, useRef } from 'react';
-import { useParams, Link, Navigate } from 'react-router-dom';
-import { ArrowLeft, Calendar, Clock, Share2, Twitter, Linkedin, Facebook } from 'lucide-react';
-import { getBlogPostById, getRelatedPosts } from '@/data/blog';
-import gsap from 'gsap';
+import { useEffect, useRef } from "react";
+import { marked } from "marked";
+import { useParams, Link, Navigate } from "react-router-dom";
+import {
+  ArrowLeft,
+  Calendar,
+  Clock,
+  Share2,
+  Twitter,
+  Linkedin,
+  Facebook,
+} from "lucide-react";
+import { getBlogPostById, getRelatedPosts } from "@/data/blog";
+import gsap from "gsap";
 
 export function BlogPostPage() {
   const { postId } = useParams<{ postId: string }>();
-  const post = getBlogPostById(postId || '');
+  const post = getBlogPostById(postId || "");
   const pageRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     if (!post) return;
-    
+
     window.scrollTo(0, 0);
-    
+
     const ctx = gsap.context(() => {
       gsap.fromTo(
-        '.post-content',
+        ".post-content",
         { opacity: 0, y: 40 },
-        { opacity: 1, y: 0, duration: 0.8, ease: 'power3.out' }
+        { opacity: 1, y: 0, duration: 0.8, ease: "power3.out" },
       );
     }, pageRef);
 
@@ -31,34 +40,9 @@ export function BlogPostPage() {
 
   const relatedPosts = getRelatedPosts(post.id);
 
-  // Convert markdown-like content to HTML
+  // Use marked to convert markdown to HTML
   const formatContent = (content: string) => {
-    return content
-      .split('\n\n')
-      .map((paragraph) => {
-        if (paragraph.startsWith('# ')) {
-          return `<h1 class="text-4xl font-bold mb-6 font-['Oswald']">${paragraph.replace('# ', '')}</h1>`;
-        }
-        if (paragraph.startsWith('## ')) {
-          return `<h2 class="text-2xl font-bold mt-10 mb-4 font-['Oswald']">${paragraph.replace('## ', '')}</h2>`;
-        }
-        if (paragraph.startsWith('### ')) {
-          return `<h3 class="text-xl font-bold mt-8 mb-3 font-['Oswald']">${paragraph.replace('### ', '')}</h3>`;
-        }
-        if (paragraph.startsWith('- ')) {
-          const items = paragraph.split('\n').map(line => line.replace('- ', ''));
-          return `<ul class="list-disc list-inside space-y-2 mb-6 text-muted-foreground">${items.map(item => `<li>${item}</li>`).join('')}</ul>`;
-        }
-        if (paragraph.startsWith('1. ')) {
-          const items = paragraph.split('\n').map(line => line.replace(/^\d+\. /, ''));
-          return `<ol class="list-decimal list-inside space-y-2 mb-6 text-muted-foreground">${items.map(item => `<li>${item}</li>`).join('')}</ol>`;
-        }
-        if (paragraph.startsWith('**') && paragraph.endsWith('**')) {
-          return `<p class="font-bold mb-4">${paragraph.replace(/\*\*/g, '')}</p>`;
-        }
-        return `<p class="text-muted-foreground leading-relaxed mb-6">${paragraph}</p>`;
-      })
-      .join('');
+    return marked.parse((content || "").trim());
   };
 
   return (
@@ -70,7 +54,13 @@ export function BlogPostPage() {
           alt={post.title}
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+        <div
+          className="absolute inset-0"
+          style={{
+            background:
+              "linear-gradient(to top, hsl(var(--background)), hsl(var(--background) / 0.6), transparent)",
+          }}
+        />
       </div>
 
       {/* Content */}
@@ -79,6 +69,7 @@ export function BlogPostPage() {
         <Link
           to="/blog"
           className="inline-flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors duration-300 mb-6"
+          style={{ color: "hsl(var(--muted-foreground))" }}
         >
           <ArrowLeft className="w-4 h-4" />
           Back to Blog
@@ -87,12 +78,21 @@ export function BlogPostPage() {
         {/* Article Card */}
         <article className="bg-card border border-border rounded-3xl p-8 md:p-12 shadow-xl">
           {/* Category */}
-          <span className="inline-block px-4 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-6">
+          <span
+            className="inline-block px-4 py-1 bg-primary/10 text-primary text-sm font-medium rounded-full mb-6"
+            style={{
+              background: "hsl(var(--primary) / 0.10)",
+              color: "hsl(var(--primary))",
+            }}
+          >
             {post.category}
           </span>
 
           {/* Title */}
-          <h1 className="text-3xl md:text-4xl font-bold mb-6 font-['Oswald']">
+          <h1
+            className="text-3xl md:text-4xl font-bold mb-6 font-['Space_Grotesk']"
+            style={{ color: "hsl(var(--foreground))" }}
+          >
             {post.title}
           </h1>
 
@@ -105,17 +105,27 @@ export function BlogPostPage() {
                 className="w-12 h-12 rounded-full object-cover"
               />
               <div>
-                <p className="font-medium">{post.author.name}</p>
-                <p className="text-sm text-muted-foreground">{post.author.role}</p>
+                <p
+                  className="font-medium"
+                  style={{ color: "hsl(var(--foreground))" }}
+                >
+                  {post.author.name}
+                </p>
+                <p
+                  className="text-sm text-muted-foreground"
+                  style={{ color: "hsl(var(--muted-foreground))" }}
+                >
+                  {post.author.role}
+                </p>
               </div>
             </div>
             <div className="flex items-center gap-4 text-sm text-muted-foreground">
               <span className="flex items-center gap-1">
                 <Calendar className="w-4 h-4" />
-                {new Date(post.date).toLocaleDateString('en-US', {
-                  month: 'long',
-                  day: 'numeric',
-                  year: 'numeric',
+                {new Date(post.date).toLocaleDateString("en-US", {
+                  month: "long",
+                  day: "numeric",
+                  year: "numeric",
                 })}
               </span>
               <span className="flex items-center gap-1">
@@ -126,8 +136,12 @@ export function BlogPostPage() {
           </div>
 
           {/* Content */}
-          <div 
-            className="prose prose-lg max-w-none"
+          <div
+            className="prose prose-lg prose-invert max-w-none prose-headings:font-['Space_Grotesk'] prose-headings:text-foreground prose-h1:text-4xl prose-h2:text-2xl prose-h3:text-xl prose-h1:mb-6 prose-h2:mb-4 prose-h3:mb-3 prose-h2:mt-10 prose-h3:mt-8 prose-p:text-muted-foreground prose-p:mb-6 prose-li:text-muted-foreground prose-blockquote:border-l-4 prose-blockquote:border-primary prose-blockquote:pl-6 prose-blockquote:text-muted-foreground prose-code:bg-background prose-code:text-primary prose-code:px-2 prose-code:py-1 prose-code:rounded-md prose-img:rounded-xl prose-img:shadow-lg prose-a:text-primary prose-a:underline hover:prose-a:text-primary/80"
+            style={{
+              // prose-invert for dark mode, prose-headings:text-foreground, etc. handled by Tailwind, but fallback for custom themes
+              color: "hsl(var(--foreground) / 0.85)",
+            }}
             dangerouslySetInnerHTML={{ __html: formatContent(post.content) }}
           />
 
@@ -138,6 +152,10 @@ export function BlogPostPage() {
                 <span
                   key={i}
                   className="px-3 py-1 bg-muted rounded-full text-sm"
+                  style={{
+                    background: "hsl(var(--muted))",
+                    color: "hsl(var(--foreground) / 0.8)",
+                  }}
                 >
                   #{tag}
                 </span>
@@ -147,18 +165,47 @@ export function BlogPostPage() {
 
           {/* Share */}
           <div className="mt-8 flex items-center justify-between">
-            <span className="text-sm text-muted-foreground">Share this article</span>
+            <span
+              className="text-sm text-muted-foreground"
+              style={{ color: "hsl(var(--muted-foreground))" }}
+            >
+              Share this article
+            </span>
             <div className="flex gap-3">
-              <button className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300">
+              <button
+                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+                style={{
+                  background: "hsl(var(--muted))",
+                  color: "hsl(var(--foreground))",
+                }}
+              >
                 <Twitter className="w-4 h-4" />
               </button>
-              <button className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300">
+              <button
+                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+                style={{
+                  background: "hsl(var(--muted))",
+                  color: "hsl(var(--foreground))",
+                }}
+              >
                 <Linkedin className="w-4 h-4" />
               </button>
-              <button className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300">
+              <button
+                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+                style={{
+                  background: "hsl(var(--muted))",
+                  color: "hsl(var(--foreground))",
+                }}
+              >
                 <Facebook className="w-4 h-4" />
               </button>
-              <button className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-white transition-colors duration-300">
+              <button
+                className="w-10 h-10 rounded-full bg-muted flex items-center justify-center hover:bg-primary hover:text-primary-foreground transition-colors duration-300"
+                style={{
+                  background: "hsl(var(--muted))",
+                  color: "hsl(var(--foreground))",
+                }}
+              >
                 <Share2 className="w-4 h-4" />
               </button>
             </div>
@@ -168,7 +215,9 @@ export function BlogPostPage() {
         {/* Related Posts */}
         {relatedPosts.length > 0 && (
           <div className="mt-16">
-            <h2 className="text-2xl font-bold mb-8 font-['Oswald']">Related Articles</h2>
+            <h2 className="text-2xl font-bold mb-8 font-['Space_Grotesk']">
+              Related Articles
+            </h2>
             <div className="grid md:grid-cols-2 gap-6">
               {relatedPosts.map((related) => (
                 <Link
@@ -182,13 +231,24 @@ export function BlogPostPage() {
                     className="w-24 h-24 object-cover rounded-lg flex-shrink-0"
                   />
                   <div>
-                    <span className="text-xs text-primary font-medium">{related.category}</span>
-                    <h3 className="font-bold mt-1 group-hover:text-primary transition-colors duration-300 line-clamp-2">
-                      {related.title}
-                    </h3>
-                    <p className="text-sm text-muted-foreground mt-2 line-clamp-2">
-                      {related.excerpt}
-                    </p>
+                    <span className="text-xs text-primary font-medium">
+                      {related.category}
+                    </span>
+                    <div className="flex flex-wrap gap-2 mt-2">
+                      {related.tags &&
+                        related.tags.map((tag: string, i: number) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1 bg-muted rounded-full text-sm"
+                            style={{
+                              background: "hsl(var(--muted))",
+                              color: "hsl(var(--foreground) / 0.8)",
+                            }}
+                          >
+                            #{tag}
+                          </span>
+                        ))}
+                    </div>
                   </div>
                 </Link>
               ))}

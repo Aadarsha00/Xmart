@@ -1,131 +1,109 @@
-import { useEffect, useRef, useState } from 'react';
-import { TrendingUp, Users, Globe, Award, Zap, Clock } from 'lucide-react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { 
-    icon: Users, 
-    value: 500, 
-    suffix: '+', 
-    label: 'Happy Clients',
-    description: 'Trusted by businesses worldwide'
+  {
+    value: 500,
+    suffix: "+",
+    label: "Happy Clients",
   },
-  { 
-    icon: TrendingUp, 
-    value: 98, 
-    suffix: '%', 
-    label: 'Success Rate',
-    description: 'Project completion rate'
+  {
+    value: 98,
+    suffix: "%",
+    label: "Success Rate",
   },
-  { 
-    icon: Globe, 
-    value: 50, 
-    suffix: '+', 
-    label: 'Countries Served',
-    description: 'Global reach and support'
+  {
+    value: 50,
+    suffix: "+",
+    label: "Countries Served",
   },
-  { 
-    icon: Award, 
-    value: 25, 
-    suffix: '+', 
-    label: 'Industry Awards',
-    description: 'Recognition for excellence'
-  },
-  { 
-    icon: Zap, 
-    value: 99.9, 
-    suffix: '%', 
-    label: 'Uptime Guarantee',
-    description: 'Reliable infrastructure'
-  },
-  { 
-    icon: Clock, 
-    value: 24, 
-    suffix: '/7', 
-    label: 'Expert Support',
-    description: 'Round-the-clock assistance'
+  {
+    value: 99.9,
+    suffix: "%",
+    label: "Uptime Guarantee",
   },
 ];
 
-function AnimatedCounter({ value, suffix, isVisible }: { value: number; suffix: string; isVisible: boolean }) {
+function AnimatedCounter({
+  value,
+  suffix,
+  isVisible,
+}: {
+  value: number;
+  suffix: string;
+  isVisible: boolean;
+}) {
   const [count, setCount] = useState(0);
-  const countRef = useRef({ value: 0 });
 
   useEffect(() => {
-    if (!isVisible) return;
+    if (!isVisible) {
+      return;
+    }
 
-    const duration = 2;
-    const startTime = Date.now();
-    const endValue = value;
+    const duration = 1.8;
+    const start = performance.now();
 
-    const animate = () => {
-      const elapsed = (Date.now() - startTime) / 1000;
-      const progress = Math.min(elapsed / duration, 1);
-      
-      // Easing function for smooth animation
-      const easeOutQuart = 1 - Math.pow(1 - progress, 4);
-      const currentValue = easeOutQuart * endValue;
-      
-      countRef.current.value = currentValue;
-      setCount(currentValue);
+    const tick = (time: number) => {
+      const progress = Math.min((time - start) / (duration * 1000), 1);
+      const eased = 1 - Math.pow(1 - progress, 4);
+      setCount(eased * value);
 
       if (progress < 1) {
-        requestAnimationFrame(animate);
+        requestAnimationFrame(tick);
       } else {
-        setCount(endValue);
+        setCount(value);
       }
     };
 
-    requestAnimationFrame(animate);
-  }, [value, isVisible]);
+    requestAnimationFrame(tick);
+  }, [isVisible, value]);
 
-  const displayValue = value % 1 !== 0 
-    ? count.toFixed(1) 
-    : Math.floor(count).toString();
+  const displayValue = Number.isInteger(value)
+    ? Math.floor(count).toString()
+    : count.toFixed(1);
 
   return (
     <span>
-      {displayValue}{suffix}
+      {displayValue}
+      {suffix}
     </span>
   );
 }
 
 export function Statistics() {
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef<HTMLElement>(null);
   const cardsRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const ctx = gsap.context(() => {
-      // Section reveal animation
       ScrollTrigger.create({
         trigger: sectionRef.current,
-        start: 'top 70%',
+        start: "top 72%",
+        once: true,
         onEnter: () => setIsVisible(true),
       });
 
-      // Cards staggered animation
-      const cards = cardsRef.current?.querySelectorAll('.stat-card');
+      const cards = cardsRef.current?.querySelectorAll(".stat-card");
       if (cards) {
         gsap.fromTo(
           cards,
-          { opacity: 0, y: 60, scale: 0.9 },
+          { opacity: 0, y: 30 },
           {
             opacity: 1,
             y: 0,
-            scale: 1,
-            duration: 0.8,
-            stagger: 0.1,
-            ease: 'power3.out',
+            duration: 0.72,
+            stagger: 0.08,
+            ease: "power3.out",
             scrollTrigger: {
               trigger: cardsRef.current,
-              start: 'top 80%',
-              toggleActions: 'play none none reverse',
+              start: "top 84%",
+              toggleActions: "play none none reverse",
             },
-          }
+          },
         );
       }
     }, sectionRef);
@@ -134,77 +112,61 @@ export function Statistics() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 relative overflow-hidden">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0">
-        <img 
-          src="/stats-bg.jpg" 
-          alt="" 
-          className="w-full h-full object-cover opacity-20"
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-background via-background/95 to-background" />
-      </div>
+    <section
+      ref={sectionRef}
+      className="relative overflow-hidden py-20 sm:py-24"
+    >
+      <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="mb-10 grid gap-6 lg:mb-12 lg:grid-cols-[1.1fr_1fr] lg:items-end">
+          <div>
+            <p
+              className="font-['Space_Grotesk'] text-xs font-medium tracking-[0.16em] uppercase"
+              style={{ color: "hsl(var(--foreground) / 0.55)" }}
+            >
+              Our Impact
+            </p>
+            <h2
+              className="mt-3 font-['Space_Grotesk'] text-4xl font-semibold tracking-tight sm:text-5xl lg:text-6xl"
+              style={{ color: "hsl(var(--foreground))" }}
+            >
+              Numbers That Speak
+            </h2>
+          </div>
 
-      {/* Animated Background Elements */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 bg-primary/5 rounded-full blur-3xl animate-pulse" />
-        <div className="absolute bottom-1/4 right-1/4 w-64 h-64 bg-blue-400/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }} />
-      </div>
-
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 border border-primary/20">
-            Our Impact
-          </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 font-['Oswald']">
-            Numbers That <span className="text-gradient">Speak</span>
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Our track record of success demonstrates our commitment to delivering 
-            exceptional results for every client.
+          <p
+            className="max-w-xl text-sm leading-relaxed sm:text-base lg:justify-self-end"
+            style={{ color: "hsl(var(--foreground) / 0.62)" }}
+          >
+            We focus on predictable delivery, measurable outcomes, and long-term
+            partnerships. These numbers represent the consistency of our process
+            across industries and project scales.
           </p>
         </div>
 
-        {/* Stats Grid */}
-        <div ref={cardsRef} className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {stats.map((stat, index) => (
-            <div
-              key={index}
-              className="stat-card group relative bg-card/80 backdrop-blur-sm border border-border rounded-2xl p-8 transition-all duration-500 hover:shadow-2xl hover:shadow-primary/10 hover:-translate-y-2 hover:border-primary/30"
-            >
-              {/* Spotlight effect */}
-              <div className="absolute inset-0 rounded-2xl bg-gradient-to-br from-primary/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              
-              {/* Icon */}
-              <div className="relative w-14 h-14 rounded-xl bg-gradient-to-br from-primary to-blue-500 flex items-center justify-center mb-6 group-hover:scale-110 group-hover:rotate-3 transition-all duration-500 shadow-lg shadow-primary/20">
-                <stat.icon className="w-7 h-7 text-white" />
-              </div>
-
-              {/* Value */}
-              <div className="relative text-4xl sm:text-5xl font-bold text-gradient mb-2 font-['Oswald'] group-hover:scale-105 transition-transform duration-300 origin-left">
-                <AnimatedCounter 
-                  value={stat.value} 
-                  suffix={stat.suffix} 
-                  isVisible={isVisible} 
+        <div
+          ref={cardsRef}
+          className="grid grid-cols-2 gap-x-8 gap-y-10 sm:gap-x-10 sm:gap-y-12 lg:grid-cols-4 lg:gap-x-12"
+        >
+          {stats.map((stat) => (
+            <article key={stat.label} className="stat-card ">
+              <p
+                className="font-['Space_Grotesk'] tabular-nums text-6xl font-semibold leading-none tracking-tight sm:text-7xl lg:text-8xl"
+                style={{ color: "hsl(var(--foreground))" }}
+              >
+                <AnimatedCounter
+                  value={stat.value}
+                  suffix={stat.suffix}
+                  isVisible={isVisible}
                 />
-              </div>
+              </p>
 
-              {/* Label */}
-              <div className="relative text-lg font-semibold mb-1 group-hover:text-primary transition-colors duration-300">
+              <h3
+                className="mt-3 font-['Space_Grotesk'] text-sm font-medium leading-snug sm:text-base"
+                style={{ color: "hsl(var(--foreground) / 0.70)" }}
+              >
                 {stat.label}
-              </div>
-
-              {/* Description */}
-              <div className="relative text-sm text-muted-foreground">
-                {stat.description}
-              </div>
-
-              {/* Decorative corner */}
-              <div className="absolute top-0 right-0 w-20 h-20 overflow-hidden rounded-tr-2xl">
-                <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-bl from-primary/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-              </div>
-            </div>
+              </h3>
+            </article>
           ))}
         </div>
       </div>

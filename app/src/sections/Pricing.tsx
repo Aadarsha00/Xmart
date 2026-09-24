@@ -139,7 +139,7 @@ export function Pricing() {
           <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-4 border border-primary/20">
             Pricing Plans
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 font-['Oswald']">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 font-['Space_Grotesk']">
             Simple, Transparent <span className="text-gradient">Pricing</span>
           </h2>
           <p className="text-lg text-muted-foreground max-w-2xl mx-auto mb-8">
@@ -193,7 +193,7 @@ export function Pricing() {
                 }`}>
                   <plan.icon className={`w-6 h-6 ${plan.popular ? 'text-white' : 'text-primary'}`} />
                 </div>
-                <h3 className="text-xl font-bold font-['Oswald']">{plan.name}</h3>
+                <h3 className="text-xl font-bold font-['Space_Grotesk']">{plan.name}</h3>
                 <p className="text-sm text-muted-foreground mt-1">{plan.description}</p>
               </div>
 
@@ -201,13 +201,13 @@ export function Pricing() {
               <div className="mb-6">
                 {plan.monthlyPrice ? (
                   <div className="flex items-baseline gap-1">
-                    <span className="text-4xl font-bold font-['Oswald']">
+                    <span className="text-4xl font-bold font-['Space_Grotesk']">
                       ${isYearly ? plan.yearlyPrice : plan.monthlyPrice}
                     </span>
                     <span className="text-muted-foreground">/month</span>
                   </div>
                 ) : (
-                  <div className="text-2xl font-bold font-['Oswald']">Custom</div>
+                  <div className="text-2xl font-bold font-['Space_Grotesk']">Custom</div>
                 )}
                 {plan.monthlyPrice && isYearly && (
                   <p className="text-sm text-green-500 mt-1">

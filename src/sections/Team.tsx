@@ -5,47 +5,15 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 gsap.registerPlugin(ScrollTrigger);
 
+// The source site does not publish a team directory or individual team photos.
+// Keep this section ready for approved names and roles when that content is supplied.
 const teamMembers = [
-  {
-    name: "Sabin Joshi",
-    role: "Founder",
-    image: "/SabinPicture.jpeg",
-  },
-  {
-    name: "Diwas Amatya",
-    role: "Chief Executive Officer",
-    image: "/diwaspicture2.jpeg",
-  },
-  {
-    name: "Aryak Shah",
-    role: "Chief Technology Officer",
-    image: "/AryakPicture.jpeg",
-  },
-  {
-    name: "Dipendra Shrestha",
-    role: "Company Controller",
-    image: "/DipendraPicture.jpeg",
-  },
-  {
-    name: "Inka Pradhan",
-    role: "Designer",
-    image: "/InkaPicture2.jpeg",
-  },
-  {
-    name: "Bhargav Pokhrel",
-    role: "Programmer",
-    image: "/BhargavPicture.jpeg",
-  },
-  {
-    name: "Prachi Sulpya",
-    role: "Business Development Officer",
-    image: "/PrachiPicture.jpeg",
-  },
-  {
-    name: "Tisa Kasaju",
-    role: "Cybersecurity",
-    image: "/tisapicture.jpeg",
-  },
+  { name: "Sabin Joshi", role: "CEO & Founder", image: "/dummy-avatar.png" },
+  { name: "David Miller", role: "Co-Founder & CTO", image: "/dummy-avatar.png" },
+  { name: "Sarah Jenkins", role: "Lead UI/UX Designer", image: "/dummy-avatar.png" },
+  { name: "Emily Watson", role: "Senior Full-Stack Engineer", image: "/dummy-avatar.png" },
+  { name: "Michael Chang", role: "Cloud & DevOps Architect", image: "/dummy-avatar.png" },
+  { name: "Jessica Taylor", role: "Head of SEO & Digital Growth", image: "/dummy-avatar.png" },
 ];
 
 export function Team() {
@@ -185,11 +153,14 @@ export function Team() {
                   background: "hsl(var(--background) / 0.20)",
                 }}
               >
-                <img
-                  src={member.image}
-                  alt={member.name}
-                  className="h-56 w-full object-cover object-center transition-transform duration-700 group-hover:scale-[1.02] sm:h-60"
-                />
+                {/* The source site uses this shared illustrated avatar instead of individual photography. */}
+                <div className="relative flex h-56 items-center justify-center overflow-hidden bg-primary/5 sm:h-60">
+                  <img
+                    src="https://xmart-point.com/dummy-avatar.png"
+                    alt=""
+                    className="h-full w-full object-contain p-8 transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
                 <div
                   className="pointer-events-none absolute inset-0 bg-gradient-to-t"
                   style={{

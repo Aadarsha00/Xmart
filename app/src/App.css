@@ -17,7 +17,7 @@
 
 /* Custom selection color */
 ::selection {
-  background-color: rgba(0, 117, 235, 0.3);
+  background-color: rgba(250, 175, 62, 0.3);
   color: inherit;
 }
 

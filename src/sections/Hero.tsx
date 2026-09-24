@@ -32,7 +32,7 @@ export function Hero() {
       <div className="relative z-10 mx-auto flex min-h-[calc(100vh-7rem)] w-full max-w-6xl flex-col items-center justify-center px-6 pb-20 text-center">
         <h1 className="font-['Space_Grotesk'] text-5xl font-bold uppercase leading-[0.92] tracking-tight text-[hsl(var(--foreground))] sm:text-6xl lg:text-8xl">
           <span className="block">
-            We Build And <span className="text-primary italic">Scale</span>
+          We Build And <span className="text-primary italic">Scale</span>
           </span>
           <span
             className="relative mt-2 inline-block px-6 py-2.5 sm:px-8 sm:py-3 lg:px-10 lg:py-3.5"

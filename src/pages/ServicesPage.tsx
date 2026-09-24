@@ -125,15 +125,14 @@ export function ServicesPage() {
             style={{ color: "hsl(var(--foreground))" }}
           >
             Comprehensive{" "}
-            <span style={{ color: "hsl(var(--primary))" }}>IT Solutions</span>
+            <span style={{ color: "hsl(var(--primary))" }}>Digital Services</span>
           </h1>
           <p
             className="text-base mb-5 leading-relaxed max-w-2xl"
             style={{ color: "hsl(var(--foreground) / 0.7)" }}
           >
-            From cloud infrastructure to AI-powered applications, we offer a
-            full spectrum of technology services to help your business thrive in
-            the digital age.
+            From strategy and design through development, security, marketing,
+            and ongoing support, we help businesses build and grow online.
           </p>
         </div>
       </section>
@@ -144,11 +143,13 @@ export function ServicesPage() {
           {services.map((service) => (
             <div key={service.id} className="group flex flex-col h-full">
               <div className="relative mb-6 rounded-2xl overflow-hidden aspect-[4/3] border border-border bg-card/80 glass-effect">
-                <img
-                  src={service.image}
-                  alt={service.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
+                <div className="relative h-full w-full">
+                  <img
+                    src={service.image}
+                    alt={service.title}
+                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+                </div>
                 <div className="absolute bottom-4 left-4">
                   <div className="w-12 h-12 rounded-xl bg-primary flex items-center justify-center shadow-md">
                     <service.icon className="w-6 h-6 text-primary-foreground" />

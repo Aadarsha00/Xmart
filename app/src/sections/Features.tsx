@@ -168,7 +168,7 @@ export function Features() {
             <Sparkles className="w-4 h-4" />
             Why Choose Us
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 font-['Oswald']" style={{ perspective: '1000px' }}>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 font-['Space_Grotesk']" style={{ perspective: '1000px' }}>
             {titleText.split('').map((char, i) => (
               <span
                 key={i}
@@ -222,7 +222,7 @@ export function Features() {
               </div>
 
               {/* Content */}
-              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300 font-['Oswald']">
+              <h3 className="text-xl font-bold mb-3 group-hover:text-primary transition-colors duration-300 font-['Space_Grotesk']">
                 {feature.title}
               </h3>
               <p className="text-muted-foreground mb-6 leading-relaxed">

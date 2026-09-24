@@ -56,9 +56,7 @@ export function QuoteStatement() {
               className="relative mx-auto max-w-5xl text-center font-['Space_Grotesk'] text-2xl font-medium leading-snug tracking-tight sm:text-3xl lg:text-4xl"
               style={{ color: "hsl(var(--foreground) / 0.90)" }}
             >
-              People build websites, develop brands, and build shops selling
-              stuff. A better internet, for people, one site at a time. We work
-              better and more efficiently than others.
+              We build software that builds value.
             </blockquote>
           </CardContent>
         </Card>

@@ -42,7 +42,7 @@ export function ServiceDetailPage() {
         <img
           src={service.image}
           alt={service.title}
-          className="w-full h-full object-cover"
+          className="h-full w-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-background via-background/80 to-transparent" />
         

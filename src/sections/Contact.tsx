@@ -10,9 +10,9 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 const contactInfo = [
-  { icon: Mail, label: "Email", value: "hello@Xmart.io" },
-  { icon: Phone, label: "Phone", value: "+1 (555) 123-4567" },
-  { icon: MapPin, label: "Location", value: "San Francisco, CA" },
+  { icon: Mail, label: "Email", value: "info@xmart-point.com" },
+  { icon: Phone, label: "Phone", value: "+1 6827166824" },
+  { icon: MapPin, label: "Location", value: "Arlington, Texas" },
 ];
 
 export function Contact() {
